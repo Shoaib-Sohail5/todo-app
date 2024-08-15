@@ -14,7 +14,7 @@ app.post('/todo', async (req, res) => {
     const createPayload = req.body
     const parsedPayload = createTodo.safeParse(createPayload)
 
-    if(!parsedPayload.success()) {
+    if(!parsedPayload.success) {
         res.status(411).json({
             msg: "you have send wrong inputs"
         })
@@ -23,7 +23,7 @@ app.post('/todo', async (req, res) => {
 
     await todo.create({
         title: createPayload.title,
-        description: createPayload,
+        description: createPayload.description,
         completed: false
     })
 
